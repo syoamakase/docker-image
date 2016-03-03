@@ -31,8 +31,9 @@ RUN apt-get update && apt-get install -q -y xvfb \
     && rm -rf /var/lib/apt/lists/*
 
 # run xvfb
-RUN Xvfb :1 -screen 0 1024x768x16 &> xvfb.log & \
-    && DISPLAY=:1.0 \
+RUN Xvfb :1 -screen 0 1024x768x16 &> xvfb.log & 
+
+RUN DISPLAY=:1.0 \
     && export DISPLAY
 
 # build gzweb
