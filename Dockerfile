@@ -39,7 +39,7 @@ RUN DISPLAY=:1.0 \
 # build gzweb
 RUN cd ~/gzweb \
     && hg up default \
-    && ./deploy.sh -m
+    && ./deploy.sh -m -t 
 
 
 # install packages
