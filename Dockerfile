@@ -26,6 +26,15 @@ RUN apt-get update && apt-get install -q -y \
 # clone gzweb
 RUN hg clone https://bitbucket.org/osrf/gzweb ~/gzweb
 
+# install xvfb
+RUN apt-get update && apt-get install -q -y xvfb \
+    && rm -rf /var/lib/apt/lists/*
+
+# run xvfb
+RUN Xvfb :1 -screen 0 1024x768x16 &> xvfb.log & \
+    && DISPLAY=:1.0 \
+    && export DISPLAY
+
 # build gzweb
 RUN cd ~/gzweb \
     && hg up default \
@@ -78,9 +87,6 @@ RUN echo 'if [ -z "$GAZEBO_MODEL_PATH" ]; then' >> ~/.bashrc \
     && echo '    export GAZEBO_MODEL_PATH=${GAZEBO_MODEL_PATH}:~/icub-gazebo' >> ~/.bashrc \
     && echo 'fi' >> ~/.bashrc
 
-# install xvfb
-RUN apt-get update && apt-get install -q -y xvfb \
-    && rm -rf /var/lib/apt/lists/*
 
 # preparation to install anaconda
 RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
