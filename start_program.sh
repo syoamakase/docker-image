@@ -8,12 +8,11 @@ DISPLAY=:1.0
 export DISPLAY
 
 ##Start yarp
-yarserver 1>/dev/null 2>/dev/null &
-#yarpserver &
+yarpserver &
 
 ##Start gzserver
-gzserver ~/activation_gazebo/world/icub_with_cameras.world 1>/dev/null 2>/dev/null &
-#gzserver ~/activation_gazebo/world/icub_with_cameras.world &
+gzserver ~/icub_with_cameras.world 1>/dev/null 2>/dev/null &
+#gzserver ~/icub_with_cameras.world &
 
 ##Start gzweb
 ./gzweb/start_gzweb.sh 1>/dev/null 2>/dev/null

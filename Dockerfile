@@ -76,11 +76,10 @@ RUN echo 'if [ -z "$GAZEBO_MODEL_PATH" ]; then' >> ~/.bashrc \
     && echo '    export GAZEBO_MODEL_PATH=~/icub-gazebo' >> ~/.bashrc \
     && echo 'else' >> ~/.bashrc \
     && echo '    export GAZEBO_MODEL_PATH=${GAZEBO_MODEL_PATH}:~/icub-gazebo' >> ~/.bashrc \
-    && echo 'fi' >> ~/.bashrc \
-    && source ~/.bashrc
+    && echo 'fi' >> ~/.bashrc
 
-# install Xvfb
-RUN apt-get update && apt-get install -q -y Xvfb \
+# install xvfb
+RUN apt-get update && apt-get install -q -y xvfb \
     && rm -rf /var/lib/apt/lists/*
 
 # preparation to install anaconda
@@ -125,15 +124,18 @@ RUN cd /yarp/bindings \
 	&& sed -i -e "s/CREATE_PYTHON:BOOL=OFF/CREATE_PYTHON:BOOL=TRUE/" /yarp/bindings/build/CMakeCache.txt \
 	&& cmake ../ -DCMAKE_INSTALL_PREFIX:PATH=/opt/conda \
 	&& make \
-	&& make install \
+	&& make install 
 	
-RUN && mkdir ~/src
+RUN mkdir ~/src
 
 EXPOSE 8888
 EXPOSE 8080
 EXPOSE 7681
 
-COPY start_program.sh ~/
-COPY stop_program.sh ~/
-COPY world ~/
-    
+COPY start_program.sh /root/
+COPY stop_program.sh /root/
+COPY world /root/
+ 
+RUN cd \
+    && chmod +x start_program.sh \
+    && chmod +x stop_program.sh 
