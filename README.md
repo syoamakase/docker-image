@@ -17,7 +17,7 @@ ex)You want to use `icub_feet_fixed`,run this docker images in /bin/bash/ and ru
 `cp -r icub-gazebo/icub_feet_fixed gzweb/http/client/assets/`
 
 ###[YARP](http://yarp.it/)
-- YARP version : 3.3.64.13
+- YARP version : 2.3.64.13
 
 For control icub. And install python bindings. 
 
@@ -45,6 +45,7 @@ If you don't want it, pleasse set ipython notebook your own.
 2.run programs
 
 `cd ~/`
+
 `./start_program.sh`
 
 Then, when programs operate correctky, `ps` includes node x2, ipython, yarpserver, gzserver and Xvfb.
@@ -54,6 +55,7 @@ Then, when programs operate correctky, `ps` includes node x2, ipython, yarpserve
 In your host PC, you access 
 
 `http://<your docker IP>:8080`
+
 `http://<your docker IP>:8888`
 
 in your web browser.
