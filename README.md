@@ -2,12 +2,12 @@
 
 This repository is simulation environment for easy use.
 
-##Library
-###[Gazebo](http://gazebosim.org/)
+## Library
+### [Gazebo](http://gazebosim.org/)
 - Gazebo version : 6.5.1 
 - gzweb6
 
-###[icub-gazebo](https://github.com/robotology/icub-gazebo)
+### [icub-gazebo](https://github.com/robotology/icub-gazebo)
 You can use [icub](http://icub.org/). In this docker image, you can use `icub` and `icub_with_cameras`.
 
 If you want to use other icub data and you use gzweb, copy directory in `icub-gazebo/` to `gzweb/http/client/assets/`
@@ -16,7 +16,7 @@ ex)You want to use `icub_feet_fixed`,run this docker images in /bin/bash/ and ru
 
 `cp -r icub-gazebo/icub_feet_fixed gzweb/http/client/assets/`
 
-###[YARP](http://yarp.it/)
+### [YARP](http://yarp.it/)
 - YARP version : 2.3.64.13
 
 For control icub. And install python bindings. 
@@ -24,16 +24,16 @@ For control icub. And install python bindings.
 
 If YARP say Aborting,delete `/root/.config/yarp/yarp.conf`.
 
-###[gazebo-yarp-plugins](https://github.com/robotology/gazebo-yarp-plugins)
+### [gazebo-yarp-plugins](https://github.com/robotology/gazebo-yarp-plugins)
 - install in `usr/local`
 
 
-###[anaconda](https://www.continuum.io/)
+### [anaconda](https://www.continuum.io/)
 - anaconda version : 2.2.0
 
 For ipython notebook ,and chainer.
 
-<strong>[Warning]</strong>
+<strong> [Warning] </strong>
 In this docker image all hosts connect ipython notebook.
 If you don't want it, pleasse set ipython notebook your own.
 
