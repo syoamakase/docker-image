@@ -48,7 +48,7 @@ If you don't want it, pleasse set ipython notebook your own.
 
 `./start_program.sh`
 
-Then, when programs operate correctky, `ps` includes node x2, ipython, yarpserver, gzserver and Xvfb.
+Then, when programs operate correctly, `ps` includes node x2, ipython, yarpserver, gzserver and Xvfb.
 
 3.start simulator and ipython notebook
 
