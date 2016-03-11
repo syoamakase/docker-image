@@ -2,12 +2,12 @@
 
 This repository is simulation environment for easy use.
 
-##Library
-###[Gazebo](http://gazebosim.org/)
+## Library
+### [Gazebo](http://gazebosim.org/)
 - Gazebo version : 6.5.1 
 - gzweb6
 
-###[icub-gazebo](https://github.com/robotology/icub-gazebo)
+### [icub-gazebo](https://github.com/robotology/icub-gazebo)
 You can use [icub](http://icub.org/). In this docker image, you can use `icub` and `icub_with_cameras`.
 
 If you want to use other icub data and you use gzweb, copy directory in `icub-gazebo/` to `gzweb/http/client/assets/`
@@ -16,7 +16,7 @@ ex)You want to use `icub_feet_fixed`,run this docker images in /bin/bash/ and ru
 
 `cp -r icub-gazebo/icub_feet_fixed gzweb/http/client/assets/`
 
-###[YARP](http://yarp.it/)
+### [YARP](http://yarp.it/)
 - YARP version : 2.3.64.13
 
 For control icub. And install python bindings. 
@@ -37,10 +37,14 @@ For ipython notebook ,and chainer.
 In this docker image all hosts connect ipython notebook.
 If you don't want it, pleasse set ipython notebook your own.
 
-##How to use
+## How to use
 1.run docker image in /bin/bash
 
-`sudo docker run -it <imageID> /bin/bash`
+`sudo docker run -it -p 7681:7681 -p 8080:8080 -p 8888:8888 <imageID> /bin/bash`
+
+- port 7681 and 8080 is needed by gzweb.
+
+- port 8888 is needed by ipython notebook.
 
 2.run programs
 
@@ -63,3 +67,9 @@ in your web browser.
 4.stop programs
 
 `./stop_program.sh`
+
+
+## note
+
+In this state, gzweb display thumnails. Then, after `sudo docker run -it -p 7681:7681 -p 8080:8080 -p 8888:8888 <imageID> /bin/bash`
+,`vfb :1 -screen 0 1024x768x16 &> xvfb.log & ` and `~/deploy.sh -t`.
