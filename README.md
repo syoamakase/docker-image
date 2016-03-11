@@ -24,16 +24,16 @@ For control icub. And install python bindings.
 
 If YARP say Aborting,delete `/root/.config/yarp/yarp.conf`.
 
-###[gazebo-yarp-plugins](https://github.com/robotology/gazebo-yarp-plugins)
+### [gazebo-yarp-plugins](https://github.com/robotology/gazebo-yarp-plugins)
 - install in `usr/local`
 
 
-###[anaconda](https://www.continuum.io/)
+### [anaconda](https://www.continuum.io/)
 - anaconda version : 2.2.0
 
 For ipython notebook ,and chainer.
 
-<strong>[Warning]</strong>
+<strong> [Warning] </strong>
 In this docker image all hosts connect ipython notebook.
 If you don't want it, pleasse set ipython notebook your own.
 

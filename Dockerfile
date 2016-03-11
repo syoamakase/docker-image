@@ -18,9 +18,30 @@ RUN apt-get update && apt-get install -q -y \
     psmisc\
     && rm -rf /var/lib/apt/lists/*
 
+# preparation to install anaconda
+RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
+    libglib2.0-0 \
+    libxext6 \
+    libsm6 \
+    libxrender1 \
+    mercurial \
+    subversion \
+    && rm -rf /var/lib/apt/lists/*
+
+# install packages
+RUN apt-get update && apt-get install -q -y \
+    cmake \
+    libace-dev \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
 # install gazebo packages
 RUN apt-get update && apt-get install -q -y \
     libgazebo6-dev=6.5.1* \
+    && rm -rf /var/lib/apt/lists/*
+
+# preparation to install yarp bindings
+RUN apt-get update && apt-get install -q -y swig \
     && rm -rf /var/lib/apt/lists/*
 
 # clone gzweb
@@ -30,24 +51,11 @@ RUN hg clone https://bitbucket.org/osrf/gzweb ~/gzweb
 RUN apt-get update && apt-get install -q -y xvfb \
     && rm -rf /var/lib/apt/lists/*
 
-# run xvfb
-RUN Xvfb :1 -screen 0 1024x768x16 &> xvfb.log & 
-
-RUN DISPLAY=:1.0 \
-    && export DISPLAY
 
 # build gzweb
 RUN cd ~/gzweb \
     && hg up default \
-    && ./deploy.sh -m
-
-
-# install packages
-RUN apt-get update && apt-get install -q -y \
-    cmake \
-    libace-dev \
-    git \
-    && rm -rf /var/lib/apt/lists/*
+    && ./deploy.sh -m 
 
 # clone yarp
 RUN git clone https://github.com/robotology/yarp
@@ -89,16 +97,6 @@ RUN echo 'if [ -z "$GAZEBO_MODEL_PATH" ]; then' >> ~/.bashrc \
     && echo 'fi' >> ~/.bashrc
 
 
-# preparation to install anaconda
-RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
-    libglib2.0-0 \
-    libxext6 \
-    libsm6 \
-    libxrender1 \
-    mercurial \
-    subversion \
-    && rm -rf /var/lib/apt/lists/*
-
 # install
 RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
     wget --no-check-certificate https://repo.continuum.io/archive/Anaconda-2.2.0-Linux-x86_64.sh && \
@@ -119,9 +117,6 @@ RUN ipython profile create myserver \
     && sed -i -e "3a c.NotebookApp.ip = '*'" ~/.ipython/profile_myserver/ipython_notebook_config.py \
     && sed -i -e "3a c.IPKernelApp.pylab = 'inline'" ~/.ipython/profile_myserver/ipython_notebook_config.py 
 
-# preparation to install yarp bindings
-RUN apt-get update && apt-get install -q -y swig \
-    && rm -rf /var/lib/apt/lists/*
 
 # install python bindings
 RUN cd /yarp/bindings \
@@ -134,6 +129,15 @@ RUN cd /yarp/bindings \
 	&& make install 
 	
 RUN mkdir ~/src
+
+
+# run xvfb
+RUN Xvfb :1 -screen 0 1024x768x16 &> xvfb.log  \ 
+	&& DISPLAY=:1.0 \ 
+    && export DISPLAY \
+	&& echo $DISPLAY 
+
+RUN ./root/gzweb/deploy.sh -t
 
 EXPOSE 8888
 EXPOSE 8080
