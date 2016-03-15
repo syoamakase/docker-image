@@ -133,11 +133,11 @@ RUN mkdir ~/src
 
 # run xvfb
 RUN Xvfb :1 -screen 0 1024x768x16 &> xvfb.log  \ 
-	&& DISPLAY=:1.0 \ 
+    && DISPLAY=:1.0 \ 
     && export DISPLAY \
-	&& echo $DISPLAY 
+    && echo $DISPLAY 
 
-RUN ./root/gzweb/deploy.sh -t
+RUN /root/gzweb/deploy.sh -t
 
 EXPOSE 8888
 EXPOSE 8080
