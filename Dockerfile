@@ -82,7 +82,8 @@ RUN cd ~/gazebo-yarp-plugins \
 RUN export GAZEBO_PLUGIN_PATH=${GAZEBO_PLUGIN_PATH}:/usr/local/lib
 
 # clone icub-gazebo
-RUN git clone https://github.com/robotology-playground/icub-gazebo.git ~/icub-gazebo
+## RUN git clone https://github.com/robotology-playground/icub-gazebo.git ~/icub-gazebo
+RUN git clone https://github.com/syoamakase/icubFiles.git ~/icub-gazebo
 
 # copy icub and icub_with_camras in gzweb
 RUN cd \
@@ -107,7 +108,6 @@ RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
 ENV PATH /opt/conda/bin:$PATH
 ENV LANG C.UTF-8
 
-
 # setting ipython notebook
 ##  [Warning!]
 ## this script allows all hosts access to ipython notebook
@@ -130,18 +130,10 @@ RUN cd /yarp/bindings \
 	
 RUN mkdir ~/src
 
+ENV PYTHONPATH /opt/conda/python2.7/site-packages:$PYTHONPATH
 
-# run xvfb
-RUN Xvfb :1 -screen 0 1024x768x16 &> xvfb.log  \ 
-	&& DISPLAY=:1.0 \ 
-    && export DISPLAY \
-	&& echo $DISPLAY 
+RUN pip install chainer \
 
-RUN ./root/gzweb/deploy.sh -t
-
-EXPOSE 8888
-EXPOSE 8080
-EXPOSE 7681
 
 COPY start_program.sh /root/
 COPY stop_program.sh /root/

@@ -37,6 +37,14 @@ For ipython notebook ,and chainer.
 In this docker image all hosts connect ipython notebook.
 If you don't want it, pleasse set ipython notebook your own.
 
+### [Xvfb(X virtual framebuffer)](http://www.x.org/archive/X11R7.6/doc/man/man1/Xvfb.1.xhtml)
+
+For gzserver start.
+
+This software make virtual display for X11.
+
+
+
 ## How to use
 1.run docker image in /bin/bash
 
@@ -52,7 +60,7 @@ If you don't want it, pleasse set ipython notebook your own.
 
 `./start_program.sh`
 
-Then, when programs operate correctly, `ps` includes node x2, ipython, yarpserver, gzserver and Xvfb.
+Then, when programs operate correctly, `ps` includes node ,node , ipython, yarpserver, gzserver and Xvfb.
 
 3.start simulator and ipython notebook
 
@@ -71,5 +79,11 @@ in your web browser.
 
 ## note
 
-In this state, gzweb display thumnails. Then, after `sudo docker run -it -p 7681:7681 -p 8080:8080 -p 8888:8888 <imageID> /bin/bash`
-,`vfb :1 -screen 0 1024x768x16 &> xvfb.log & ` and `~/deploy.sh -t`.
+Soon You push this image, gzweb can't display thumnails. Then, after `sudo docker run -it -p 7681:7681 -p 8080:8080 -p 8888:8888 <imageID> /bin/bash`
+, in docker terminal
+
+  
+`vfb :1 -screen 0 1024x768x16 &> xvfb.log & `   
+and   
+`~/deploy.sh -t`.
+
