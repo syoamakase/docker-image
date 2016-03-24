@@ -79,7 +79,7 @@ RUN cd ~/gazebo-yarp-plugins \
     && make install
 
 # setting gazebo plugin path
-RUN export GAZEBO_PLUGIN_PATH=${GAZEBO_PLUGIN_PATH}:/usr/local/lib
+ENV GAZEBO_PLUGIN_PATH ${GAZEBO_PLUGIN_PATH}:/usr/local/lib
 
 # clone icub-gazebo
 ## RUN git clone https://github.com/robotology-playground/icub-gazebo.git ~/icub-gazebo
@@ -129,6 +129,7 @@ RUN cd /yarp/bindings \
 	&& make install 
 	
 RUN mkdir ~/src \
+    && cd ~/src \
     && git https://github.com/syoamakase/imageProcessing.git
 
 
