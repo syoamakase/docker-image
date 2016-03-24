@@ -132,18 +132,6 @@ RUN mkdir ~/src
 
 ENV PYTHONPATH /opt/conda/python2.7/site-packages:$PYTHONPATH
 
-<<<<<<< HEAD
-RUN pip install chainer \
-=======
-# run xvfb
-RUN Xvfb :1 -screen 0 1024x768x16 &> xvfb.log  \ 
-    && DISPLAY=:1.0 \ 
-    && export DISPLAY \
-    && echo $DISPLAY 
-
-RUN /root/gzweb/deploy.sh -t
->>>>>>> e1ea41dee3508fa243181d7413fadac2c7a34f2c
-
 
 COPY start_program.sh /root/
 COPY stop_program.sh /root/
