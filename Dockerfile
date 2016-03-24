@@ -128,7 +128,9 @@ RUN cd /yarp/bindings \
 	&& make \
 	&& make install 
 	
-RUN mkdir ~/src
+RUN mkdir ~/src \
+    && git https://github.com/syoamakase/imageProcessing.git
+
 
 ENV PYTHONPATH /opt/conda/python2.7/site-packages:$PYTHONPATH
 
